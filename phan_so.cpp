@@ -26,8 +26,8 @@ int main()
     int KT = true;
     while (KT)
     {
-        printf("Chon phep tinh 2 phan so: ");
-        printf("\nnhap e de thoat");
+        printf("\nthoat = e");
+        printf("\nChon phep tinh 2 phan so: ");
         fflush(stdin);
         char lc; scanf("%c", &lc);
         switch (lc)
@@ -39,8 +39,114 @@ int main()
         case '-':
             p = TruPS(p1, p2);
             Xuat(p);
+            break;
         case '*':
             p = NhanPS(p1, p2);
+            Xuat(p);
+            break;
+        case '/':
+            p = ChiaPS(p1, p2);
+            Xuat(p);
+            break;
+        case 'e':
+            KT = false;
+            break;
+        default:
+            printf("Nhap sai !!!!");
+            break;
+        }
+    }
+}
+
+void Nhap(phan_so &p)
+{
+    printf("Nhap tu"); scanf("%d", &p.tu);
+    printf("Nhap mau"); scanf("%d", &p.mau);
+}
+void Xuat(phan_so p)
+{
+    printf("\n%d/%d", p.tu, p.mau);
+}
+int UCLN(int a, int b)
+{
+    a = abs(a);
+    b = abs(b);
+    while( a* b != 0)
+    {
+        (a > b) ? (a%= b) : (b %= a);
+    }
+    return a + b;
+}
+phan_so RutGon(phan_so p)
+{
+    phan_so c;
+    c.tu = p.tu / UCLN(p.tu, p.mau);
+    c.mau = p.mau / UCLN(p.tu, p.mau);
+    return c;
+}
+
+phan_so CongPS(phan_so p1, phan_so p2)
+{
+    phan_so p;
+    if(p1.mau == p2.mau)
+    {
+        p.tu = p1.tu + p2.tu;
+        p.mau = p1.mau;
+    } else
+    {
+        p.tu = p1.tu*p2.mau + p2.tu*p1.mau;
+        p.mau = p1.mau * p2.mau;
+    }
+    if(p.mau < 0)
+    {
+        p.tu = p.tu*(-1);
+        p.mau = abs(p.mau);
+    }
+    return RutGon(p);
+}
+phan_so TruPS(phan_so p1, phan_so p2)
+{
+    phan_so p;
+    if(p1.mau == p2.mau)
+    {
+        p.tu = p1.tu - p2.tu;
+        p.mau = p1.mau;
+    } else
+    {
+        p.tu = p1.tu*p2.mau - p2.tu*p1.mau;
+        p.mau = p1.mau * p2.mau;
+    }
+    if(p.mau < 0)
+    {
+        p.tu = p.tu*(-1);
+        p.mau = abs(p.mau);
+    }
+    return RutGon(p);
+}
+phan_so NhanPS(phan_so p1, phan_so p2)
+{
+    phan_so p;
+    p.tu = p1.tu*p2.tu;
+    p.mau = p1.mau*p2.mau;
+    if(p.mau < 0)
+    {
+        p.tu = p.tu*(-1);
+        p.mau = abs(p.mau);
+    }
+    return RutGon(p);
+}
+phan_so ChiaPS(phan_so p1, phan_so p2)
+{
+    phan_so p;
+    p.tu = p1.tu * p2.mau;
+    p.mau = p1.mau * p2.tu;
+    if(p.mau < 0)
+    {
+        p.tu = p.tu*(-1);
+        p.mau = abs(p.mau);
+    }
+    return RutGon(p);
+}1, p2);
             Xuat(p);
         case '/':
             p = ChiaPS(p1, p2);
