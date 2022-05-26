@@ -12,10 +12,10 @@ void Nhap(phan_so &p);
 void Xuat(phan_so p);
 int UCLN(int a, int b);
 phan_so RutGon(phan_so p);
-phan_so CongPS(phan_so P1, phan_so p2);
-phan_so TruPS(phan_so P1, phan_so p2);
-phan_so NhanPS(phan_so P1, phan_so p2);
-phan_so ChiaPS(phan_so P1, phan_so p2);
+phan_so CongPS(phan_so p1, phan_so p2);
+phan_so TruPS(phan_so p1, phan_so p2);
+phan_so NhanPS(phan_so p1, phan_so p2);
+phan_so ChiaPS(phan_so p1, phan_so p2);
 
 int main()
 {
@@ -23,8 +23,37 @@ int main()
     phan_so p, p1, p2;
     Nhap(p1);
     Nhap(p2);
-    printf("Chon phep tinh 2 phan so: ");
-    // char lc; scanf("%c", &lc);
+    int KT = true;
+    while (KT)
+    {
+        printf("Chon phep tinh 2 phan so: ");
+        printf("\nnhap e de thoat");
+        fflush(stdin);
+        char lc; scanf("%c", &lc);
+        switch (lc)
+        {
+        case '+':
+            p = CongPS(p1, p2);
+            Xuat(p);
+            break;
+        case '-':
+            p = TruPS(p1, p2);
+            Xuat(p);
+        case '*':
+            p = NhanPS(p1, p2);
+            Xuat(p);
+        case '/':
+            p = ChiaPS(p1, p2);
+            Xuat(p);
+        case 'e':
+            KT = false;
+            break;
+        default:
+            printf("Nhap sai !!!!");
+            break;
+        }
+    }
+    
     
 }
 
@@ -69,7 +98,7 @@ phan_so CongPS(phan_so p1, phan_so p2)
     }
     return RutGon(p);
 }
-phan_so TruPS(phan_so P1, phan_so p2)
+phan_so TruPS(phan_so p1, phan_so p2)
 {
     phan_so p;
     if(p1.mau == p2.mau)
@@ -83,14 +112,14 @@ phan_so TruPS(phan_so P1, phan_so p2)
     }
     return RutGon(p);
 }
-phan_so NhanPS(phan_so P1, phan_so p2)
+phan_so NhanPS(phan_so p1, phan_so p2)
 {
     phan_so p;
         p.tu = p1.tu*p2.tu;
         p.mau = p1.mau*p2.mau;
     return RutGon(p);
 }
-phan_so ChiaPS(phan_so P1, phan_so p2)
+phan_so ChiaPS(phan_so p1, phan_so p2)
 {
     phan_so p;
     p.tu = p1.tu * p2.mau;
